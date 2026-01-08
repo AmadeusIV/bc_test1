@@ -1,70 +1,194 @@
-# Getting Started with Create React App
+# BC Test1 - Dự án Blockchain với React và Truffle
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Dự án kết hợp React frontend và Truffle smart contracts để tạo ứng dụng blockchain đơn giản với contract SimpleStorage.
 
-## Available Scripts
+## 📋 Mô tả
 
-In the project directory, you can run:
+Dự án này bao gồm:
+- **Frontend**: React application (Create React App)
+- **Smart Contracts**: Solidity contracts được quản lý bởi Truffle
+- **Contract**: SimpleStorage - Contract đơn giản để lưu trữ và truy xuất dữ liệu
 
-### `npm start`
+## 🔧 Yêu cầu hệ thống
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Trước khi bắt đầu, bạn cần cài đặt:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Node.js** (phiên bản 14.x trở lên) - [Download](https://nodejs.org/)
+- **npm** hoặc **yarn** (thường đi kèm với Node.js)
+- **Truffle** - Framework để phát triển blockchain
+- **Ganache** (tùy chọn) - Blockchain local để test
 
-### `npm test`
+## 🚀 Cài đặt
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Clone repository
 
-### `npm run build`
+```bash
+git clone https://github.com/AmadeusIV/bc_test1.git
+cd bc_test1
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Cài đặt dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+# Cài đặt dependencies cho React app
+npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Cài đặt Truffle globally (nếu chưa có)
+npm install -g truffle
+```
 
-### `npm run eject`
+### 3. Cấu hình Ganache (Cho local development)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Nếu bạn chưa có Ganache:
+- Download và cài đặt [Ganache](https://trufflesuite.com/ganache/)
+- Hoặc cài đặt qua npm: `npm install -g ganache`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Khởi động Ganache:
+- Mở Ganache GUI hoặc chạy: `ganache-cli`
+- Đảm bảo Ganache chạy trên port **7545** (theo cấu hình trong `truffle-config.js`)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📁 Cấu trúc dự án
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+bc_test1/
+├── contracts/              # Smart contracts (Solidity)
+│   ├── Migrations.sol      # Contract migration
+│   └── SimpleStorage.sol   # Contract chính để lưu trữ dữ liệu
+├── migrations/             # Scripts để deploy contracts
+│   ├── 1_initial_migration.js
+│   └── 2_deploy_simple_storage.js
+├── build/                  # Compiled contracts (tự động tạo)
+├── public/                 # Static files cho React app
+├── src/                    # Source code React app
+├── test/                   # Test files (chưa có)
+├── truffle-config.js       # Cấu hình Truffle
+└── package.json            # Dependencies và scripts
+```
 
-## Learn More
+## 🎯 Sử dụng
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Chạy React App
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm start
+```
 
-### Code Splitting
+Ứng dụng sẽ chạy tại [http://localhost:3000](http://localhost:3000)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Compile Smart Contracts
 
-### Analyzing the Bundle Size
+```bash
+truffle compile
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Contracts đã compile sẽ được lưu trong thư mục `build/contracts/`
 
-### Making a Progressive Web App
+### Deploy Smart Contracts lên Ganache
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+# Đảm bảo Ganache đang chạy trước
+truffle migrate
 
-### Advanced Configuration
+# Hoặc deploy lại từ đầu
+truffle migrate --reset
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Test Smart Contracts
 
-### Deployment
+```bash
+truffle test
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Truffle Console (Tương tác với contracts)
 
-### `npm run build` fails to minify
+```bash
+truffle console
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Trong console, bạn có thể:
+```javascript
+// Lấy instance của contract
+let instance = await SimpleStorage.deployed();
+
+// Lấy giá trị hiện tại
+let value = await instance.get();
+console.log(value.toString());
+
+// Set giá trị mới
+await instance.set(200);
+
+// Lấy lại giá trị
+let newValue = await instance.get();
+console.log(newValue.toString());
+```
+
+## 📝 Smart Contract - SimpleStorage
+
+### Chức năng
+
+- `get()`: Trả về giá trị hiện tại được lưu trữ
+- `set(uint256 _value)`: Đặt giá trị mới
+- `storedData`: Biến public để xem giá trị trực tiếp
+
+### Deploy
+
+Contract được deploy với giá trị khởi tạo là **100** (theo `migrations/2_deploy_simple_storage.js`)
+
+## 🤝 Làm việc nhóm với Git
+
+### Lần đầu clone và setup
+
+```bash
+git clone https://github.com/AmadeusIV/bc_test1.git
+cd bc_test1
+npm install
+```
+
+### Các lệnh Git thường dùng
+
+```bash
+# Kiểm tra trạng thái
+git status
+
+# Lấy code mới nhất từ GitHub
+git pull origin main
+
+# Thêm file/thay đổi vào staging
+git add .
+
+# Commit thay đổi
+git commit -m "Mô tả thay đổi"
+
+# Push lên GitHub
+git push origin main
+```
+
+### Chia sẻ repository với người khác
+
+**Cách 1: Chia sẻ công khai**
+- Vào GitHub → Settings → Change visibility → Make public
+- Chia sẻ link: `https://github.com/AmadeusIV/bc_test1`
+
+**Cách 2: Thêm Collaborators**
+- Vào GitHub → Settings → Collaborators → Add people
+- Nhập username GitHub của người cần chia sẻ
+- Họ sẽ nhận email mời và có quyền push/pull
+
+## 🔗 Tài liệu tham khảo
+
+- [Truffle Documentation](https://trufflesuite.com/docs/truffle/)
+- [React Documentation](https://reactjs.org/)
+- [Solidity Documentation](https://docs.soliditylang.org/)
+- [Web3.js Documentation](https://web3js.readthedocs.io/)
+
+## 📄 License
+
+MIT
+
+## 👤 Tác giả
+
+- GitHub: [@AmadeusIV](https://github.com/AmadeusIV)
+
+---
+
+**Lưu ý**: Đảm bảo Ganache hoặc blockchain network của bạn đang chạy trước khi deploy contracts!
